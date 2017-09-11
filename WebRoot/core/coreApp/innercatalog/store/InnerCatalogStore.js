@@ -11,7 +11,7 @@
 		type:"ajax",
 		//url:"./householdCatalog/list.do",
 		api:{
-			read:"./innerCatalog/list.do"
+			read:"innerCatalog/list.do"
 		},
 		reader:{
 			type:"json",

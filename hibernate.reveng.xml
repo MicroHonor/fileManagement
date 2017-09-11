@@ -3,16 +3,6 @@
 
 <hibernate-reverse-engineering>
 
-	<table name="MEMBER" schema="LESHENG">
-		<primary-key>
-			<generator class="sequence"></generator>
-		</primary-key>
-	</table>
-	<table name="HOUSEHOLD_REGISTER_CATALOG" schema="LESHENG">
-		<primary-key>
-			<generator class="sequence"></generator>
-		</primary-key>
-	</table>
 	<table name="T_USER" schema="LESHENG" class="User">
 		<primary-key>
 			<generator class="sequence"></generator>
