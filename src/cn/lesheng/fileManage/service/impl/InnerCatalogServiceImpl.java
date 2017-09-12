@@ -7,6 +7,8 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.springframework.stereotype.Service;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -17,6 +19,7 @@ import cn.lesheng.fileManage.model.InnerCatalog;
 import cn.lesheng.fileManage.model.User;
 import cn.lesheng.fileManage.service.IInnerCatalogService;
 
+@Service
 public class InnerCatalogServiceImpl implements IInnerCatalogService {
 	
 	@Resource

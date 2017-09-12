@@ -1,4 +1,4 @@
-Ext.define("core.household.view.InnerCatalogLayout", {
+Ext.define("core.innerCatalog.view.InnerCatalogLayout", {
 			extend : 'Ext.panel.Panel',
 			alias : 'widget.innerCataloglayout',
 			title : "<center height=40>户籍档案输入</center>",

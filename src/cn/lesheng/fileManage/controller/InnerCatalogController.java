@@ -2,6 +2,7 @@ package cn.lesheng.fileManage.controller;
 
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import cn.lesheng.fileManage.service.IInnerCatalogService;
 @RequestMapping("/innerCatalog")
 public class InnerCatalogController extends BaseController {
 	
+	@Resource
 	private IInnerCatalogService innerCatalogServiceImpl;
 	
 	@RequestMapping("/list")

@@ -1,7 +1,7 @@
 /*
  * 户籍档案
  */
- Ext.define("core.household.model.InnerCatalogModel",{
+ Ext.define("core.innerCatalog.model.InnerCatalogModel",{
  	extend:"Ext.data.Model",
  	fields:[
  		{name:"id",type:"int",srotable:true},

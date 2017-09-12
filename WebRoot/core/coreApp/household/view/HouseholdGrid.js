@@ -1,7 +1,7 @@
 /**
  * 户籍档案列表
  * */
-Ext.define("core.product.view.HouseholdGrid",{
+Ext.define("core.household.view.HouseholdGrid",{
 	extend:"Ext.grid.Panel",
 	alias:"widget.household_grid",
 	store:"core.household.store.HouseholdStore",

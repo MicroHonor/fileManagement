@@ -155,8 +155,8 @@ Ext.define("core.app.controller.MainController",{
 						self.addFunItem({
 							mainView:mainView,
 							funViewXtype:"innerCataloglayout",
-							funController:"core.household.controller.InnerCatalogController",
-							funViewName:"core.household.view.InnerCatalogLayout"
+							funController:"core.innerCatalog.controller.InnerCatalogController",
+							funViewName:"core.innerCatalog.view.InnerCatalogLayout"
 						});	
 					}
 				}//itemclick end

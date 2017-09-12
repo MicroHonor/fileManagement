@@ -1,10 +1,10 @@
 /**
  * 户籍档案列表
  * */
-Ext.define("core.product.view.InnerCatalogGrid",{
+Ext.define("core.innerCatalog.view.InnerCatalogGrid",{
 	extend:"Ext.grid.Panel",
 	alias:"widget.innerCataloggrid",
-	store:"core.household.store.InnerCatalogStore",
+	store:"core.innerCatalog.store.InnerCatalogStore",
 //	title : "户籍档案输入",
 	border:0,
 	selModel:{

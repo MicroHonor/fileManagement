@@ -1,10 +1,10 @@
 /**
  * 户籍档案列表
  * */
-Ext.define("core.product.view.InnerCatalogComparedGrid",{
+Ext.define("core.innerCatalog.view.InnerCatalogComparedGrid",{
 	extend:"Ext.grid.Panel",
 	alias:"widget.innerCatalogComparedGrid",
-	store:"core.household.store.InnerCatalogComparedStore",
+	store:"core.innerCatalog.store.InnerCatalogComparedStore",
 //	title:"已比对数据",
 	border:0,
 	selModel:{

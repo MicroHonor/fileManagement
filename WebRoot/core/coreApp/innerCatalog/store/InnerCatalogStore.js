@@ -1,9 +1,9 @@
 /*
  * 户籍档案
  */
- Ext.define("core.household.store.InnerCatalogStore",{
+ Ext.define("core.innerCatalog.store.InnerCatalogStore",{
  	extend:'Ext.data.Store',
-	model:'core.household.model.InnerCatalogModel',
+	model:'core.innerCatalog.model.InnerCatalogModel',
 	buffered: true,
     pageSize: 100,
 	//autoSync:true,//与服务器同步
