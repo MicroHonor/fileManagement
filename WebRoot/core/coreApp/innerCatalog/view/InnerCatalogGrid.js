@@ -132,10 +132,10 @@ Ext.define("core.innerCatalog.view.InnerCatalogGrid",{
 			if(record.data.errors.indexOf("|personLiable|")>-1){
                 meta.style = 'color:red';
 			}
-                return value;
+//                return value;
         }},
 		{text:"文件日期",dataIndex:"documentDate",width:80,field:{
-			xtype:"textfield"
+			xtype:"numberfield",format:'Ymd'
 		}, renderer: function (value, meta, record) {
 			if(record.data.errors.indexOf("|documentDate|")>-1){
                 meta.style = 'color:red';
