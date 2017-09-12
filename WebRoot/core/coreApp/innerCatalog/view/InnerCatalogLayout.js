@@ -1,7 +1,7 @@
 Ext.define("core.innerCatalog.view.InnerCatalogLayout", {
 			extend : 'Ext.panel.Panel',
 			alias : 'widget.innerCataloglayout',
-			title : "<center height=40>户籍档案输入</center>",
+			title : "<center height=40>卷内目录输入</center>",
 			closable : true,
 			closeAction : 'destroy',
 			defaults : {
@@ -11,7 +11,7 @@ Ext.define("core.innerCatalog.view.InnerCatalogLayout", {
 			items:[{
 				xtype:"innerCataloggrid"
 			},{
-				xtype:"householdComparedGrid",
-				hidden:false
+//				xtype:"householdComparedGrid",
+//				hidden:false
 			}]
 });

@@ -4,9 +4,13 @@ create table inner_catalog(
 	fileNo		varchar2(50),	--档号
 	content		clob,			--内容
 	inputNo		number(1),
-	isCompared	number(1),		
+	isCompared	number(1),
+	errors		varchar2(4000),		
 	constraint inner_catalog primary key(id)
 );
+ alter table inner_catalog add (
+ 	errors	varchar2(4000)
+ );
 CREATE SEQUENCE inner_catalog_sequence  
 INCREMENT BY 1   -- 每次加几个 
 START WITH 1     -- 从1开始计数

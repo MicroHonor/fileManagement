@@ -9,4 +9,5 @@ public interface IInnerCatalogDao extends ICommonDao<InnerCatalog> {
 	
 	PageInfo<InnerCatalog> findPage(PageInfo<InnerCatalog> page,User user)throws Exception;
 
+
 }

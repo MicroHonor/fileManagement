@@ -22,10 +22,11 @@ public class InnerCatalog implements java.io.Serializable {
 	// Fields
 
 	private Long id;
-	private String fileno;
+	private String fileNo;
 	private String content;
-	private Boolean inputno;
-	private Boolean iscompared;
+	private Integer inputNo;
+	private Boolean isCompared=false;
+	private String errors;
 
 	// Constructors
 
@@ -34,16 +35,16 @@ public class InnerCatalog implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public InnerCatalog(String fileno, String content, Boolean inputno,
-			Boolean iscompared) {
-		this.fileno = fileno;
+	public InnerCatalog(String fileNo, String content, Integer inputNo,
+			Boolean isCompared) {
+		this.fileNo = fileNo;
 		this.content = content;
-		this.inputno = inputno;
-		this.iscompared = iscompared;
+		this.inputNo = inputNo;
+		this.isCompared = isCompared;
 	}
 
 	// Property accessors
-	@SequenceGenerator(name = "generator")
+	@SequenceGenerator(name = "generator",sequenceName="inner_catalog_sequence",allocationSize=1)
 	@Id
 	@GeneratedValue(strategy = SEQUENCE, generator = "generator")
 	@Column(name = "ID", unique = true, nullable = false, scale = 0)
@@ -56,12 +57,12 @@ public class InnerCatalog implements java.io.Serializable {
 	}
 
 	@Column(name = "FILENO", length = 50)
-	public String getFileno() {
-		return this.fileno;
+	public String getFileNo() {
+		return this.fileNo;
 	}
 
-	public void setFileno(String fileno) {
-		this.fileno = fileno;
+	public void setFileNo(String fileNo) {
+		this.fileNo = fileNo;
 	}
 
 	@Lob
@@ -75,21 +76,31 @@ public class InnerCatalog implements java.io.Serializable {
 	}
 
 	@Column(name = "INPUTNO", precision = 1, scale = 0)
-	public Boolean getInputno() {
-		return this.inputno;
+	public Integer getInputNo() {
+		return this.inputNo;
 	}
 
-	public void setInputno(Boolean inputno) {
-		this.inputno = inputno;
+	public void setInputNo(Integer inputNo) {
+		this.inputNo = inputNo;
 	}
 
 	@Column(name = "ISCOMPARED", precision = 1, scale = 0)
-	public Boolean getIscompared() {
-		return this.iscompared;
+	public Boolean getIsCompared() {
+		return this.isCompared;
 	}
 
-	public void setIscompared(Boolean iscompared) {
-		this.iscompared = iscompared;
+	public void setIsCompared(Boolean isCompared) {
+		this.isCompared = isCompared;
 	}
+
+	@Column(name = "ERRORS",length=4000)
+	public String getErrors() {
+		return errors;
+	}
+
+	public void setErrors(String errors) {
+		this.errors = errors;
+	}
+
 
 }

@@ -96,14 +96,15 @@ Ext.define("core.app.controller.MainController",{
 				click: function(btn){
 					Ext.Msg.confirm("提示","是否要退出系统",function(btn){
 						if(btn == 'yes'){
-							if(document.all){//IE
-								window.open('', '_parent', '');
-								window.close();
-							}else{//FF
-								window.open('', '_self', '');
-								window.close();
-							}
+//							if(document.all){//IE
+//								window.open('', '_parent', '');
+//								window.close();
+//							}else{//FF
+//								window.open('', '_self', '');
+//								window.close();
+//							}
 						}
+						window.location.href="index.jsp";
 					},this);
 				}
 			},

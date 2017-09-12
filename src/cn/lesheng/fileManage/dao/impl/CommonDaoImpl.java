@@ -219,4 +219,13 @@ public class CommonDaoImpl<T> implements ICommonDao<T> {
 		String whereHql = " and id in ("+ids+") ";
 		return this.findByConditionWithOrder(whereHql, null, null);
 	}
+
+	@Override
+	public T findBrother(String fileNo, Integer inputNo) throws Exception {
+		String whereHql = " and fileNo=? and inputNo=? ";
+		Object[] values = {fileNo,3-inputNo};
+		List<T> list =this.findByConditionWithOrder(whereHql, values, null);
+		return list.size()==1?list.get(0):null;
+	}
+
 }

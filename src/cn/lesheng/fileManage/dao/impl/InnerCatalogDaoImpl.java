@@ -27,6 +27,4 @@ public class InnerCatalogDaoImpl extends CommonDaoImpl<InnerCatalog> implements 
 	}
 
 	
-	
-	
 }
