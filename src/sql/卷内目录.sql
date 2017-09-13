@@ -5,12 +5,16 @@ create table inner_catalog(
 	content		clob,			--内容
 	inputNo		number(1),
 	isCompared	number(1),
-	errors		varchar2(4000),		
+	errors		varchar2(4000),	
+	images_count	number(5),	
 	constraint inner_catalog primary key(id)
 );
- alter table inner_catalog add (
- 	errors	varchar2(4000)
- );
+alter table inner_catalog add (
+ 	errors			varchar2(4000)
+);
+alter table inner_catalog add (
+ 	images_count	number(5)
+);
 CREATE SEQUENCE inner_catalog_sequence  
 INCREMENT BY 1   -- 每次加几个 
 START WITH 1     -- 从1开始计数

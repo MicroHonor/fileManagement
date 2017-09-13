@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import cn.lesheng.fileManage.dto.PageInfo;
-import cn.lesheng.fileManage.model.InnerCatalog;
 
 /**
  * 定义公共的DAO操作标准,基本的功能包括：增加，修改全部，删除数据，根据编号查询，查询全部，分页显示，数据统计

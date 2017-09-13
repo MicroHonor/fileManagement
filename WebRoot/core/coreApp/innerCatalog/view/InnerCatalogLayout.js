@@ -11,7 +11,7 @@ Ext.define("core.innerCatalog.view.InnerCatalogLayout", {
 			items:[{
 				xtype:"innerCataloggrid"
 			},{
-//				xtype:"householdComparedGrid",
-//				hidden:false
+				xtype:"innerCatalogComparedGrid",
+				hidden:false
 			}]
 });

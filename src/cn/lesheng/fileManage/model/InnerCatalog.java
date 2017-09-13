@@ -1,13 +1,12 @@
 package cn.lesheng.fileManage.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -17,32 +16,11 @@ import javax.persistence.Table;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "INNER_CATALOG")
-public class InnerCatalog implements java.io.Serializable {
-
-	// Fields
+public class InnerCatalog  extends BaseCatalog {
 
 	private Long id;
-	private String fileNo;
-	private String content;
-	private Integer inputNo;
-	private Boolean isCompared=false;
-	private String errors;
-
-	// Constructors
-
-	/** default constructor */
-	public InnerCatalog() {
-	}
-
-	/** full constructor */
-	public InnerCatalog(String fileNo, String content, Integer inputNo,
-			Boolean isCompared) {
-		this.fileNo = fileNo;
-		this.content = content;
-		this.inputNo = inputNo;
-		this.isCompared = isCompared;
-	}
-
+	private Integer imagesCount=0;
+	
 	// Property accessors
 	@SequenceGenerator(name = "generator",sequenceName="inner_catalog_sequence",allocationSize=1)
 	@Id
@@ -55,52 +33,13 @@ public class InnerCatalog implements java.io.Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	@Column(name = "FILENO", length = 50)
-	public String getFileNo() {
-		return this.fileNo;
+	@Column(name = "IMAGES_COUNT", precision = 5, scale = 0)
+	public Integer getImagesCount() {
+		return imagesCount;
 	}
 
-	public void setFileNo(String fileNo) {
-		this.fileNo = fileNo;
+	public void setImagesCount(Integer imagesCount) {
+		this.imagesCount = imagesCount;
 	}
-
-	@Lob
-	@Column(name = "CONTENT")
-	public String getContent() {
-		return this.content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
-
-	@Column(name = "INPUTNO", precision = 1, scale = 0)
-	public Integer getInputNo() {
-		return this.inputNo;
-	}
-
-	public void setInputNo(Integer inputNo) {
-		this.inputNo = inputNo;
-	}
-
-	@Column(name = "ISCOMPARED", precision = 1, scale = 0)
-	public Boolean getIsCompared() {
-		return this.isCompared;
-	}
-
-	public void setIsCompared(Boolean isCompared) {
-		this.isCompared = isCompared;
-	}
-
-	@Column(name = "ERRORS",length=4000)
-	public String getErrors() {
-		return errors;
-	}
-
-	public void setErrors(String errors) {
-		this.errors = errors;
-	}
-
-
+	
 }

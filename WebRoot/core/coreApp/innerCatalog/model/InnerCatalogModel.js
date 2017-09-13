@@ -27,6 +27,7 @@
  		{name:"organizationNo",type:"string",srotable:true},		//机构号
  		{name:"recorder",type:"string",srotable:true},			//著录人
  		{name:"recordDate",type:"string",srotable:true},			//著录日期
- 		{name:"errors",type:"string",srotable:true}				//比对失败的数据
+ 		{name:"errors",type:"string",srotable:true},				//比对失败的数据
+ 		{name:"imagesCount",type:"int",srotable:true}				//图片数量
  	]
  });

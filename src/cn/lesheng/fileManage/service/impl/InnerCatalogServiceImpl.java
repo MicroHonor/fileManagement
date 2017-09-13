@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -14,35 +15,40 @@ import cn.lesheng.fileManage.dto.PageInfo;
 import cn.lesheng.fileManage.dto.PageMsg;
 import cn.lesheng.fileManage.model.InnerCatalog;
 import cn.lesheng.fileManage.model.User;
+import cn.lesheng.fileManage.service.IImageService;
 import cn.lesheng.fileManage.service.IInnerCatalogService;
 import cn.lesheng.fileManage.util.CompareUtils;
+import cn.lesheng.fileManage.util.FileUtil;
 import cn.lesheng.fileManage.util.GsonUtil;
 
 @Service
-public class InnerCatalogServiceImpl implements IInnerCatalogService {
+public class InnerCatalogServiceImpl extends AbsBaseServiceImpl implements IInnerCatalogService {
 	
 	@Resource
 	private IInnerCatalogDao innerCatalogDaoImpl;
+	
+	@Resource
+	private IImageService imageServiceImpl;
+	
+	@Value("${fileImagePath}")
+	private String imagePath;
 
 	@Override
 	public PageInfo<Map<String, Object>> list(
 			PageInfo<Map<String, Object>> page, User currentUser)
 			throws Exception {
+		PageInfo<InnerCatalog> entityPage = this.innerCatalogDaoImpl
+				.findPageByInputNo(createQueryPage(page), currentUser.getOrderType());
+		page.setList(createMapList(entityPage.getList()));
+		return page;
+	}
+
+	private PageInfo<InnerCatalog> createQueryPage(
+			PageInfo<Map<String, Object>> page) {
 		PageInfo<InnerCatalog> entityPage = new PageInfo<InnerCatalog>();
 		entityPage.setStart(page.getStart());
 		entityPage.setTotalCount(page.getTotalCount());
-		entityPage = this.innerCatalogDaoImpl.findPage(entityPage, currentUser);
-		List<InnerCatalog> entityList = entityPage.getList();
-		List<Map<String,Object>> mapList = new ArrayList<Map<String,Object>>();
-		for(InnerCatalog entity:entityList){
-			Map<String,Object> map = GsonUtil.jsonStrToMap(entity.getContent());
-			map.put("id", entity.getId());
-			map.put("fileNo", entity.getFileNo());
-			map.put("errors", entity.getErrors());
-			mapList.add(map);
-		}
-		page.setList(mapList);
-		return page;
+		return entityPage;
 	}
 
 	@Override
@@ -54,6 +60,8 @@ public class InnerCatalogServiceImpl implements IInnerCatalogService {
 		String idStr = (String)map.get("id");
 		map.remove("fileNo");
 		map.remove("id");
+		map.remove("errors");
+		map.remove("imagesCount");
 		String content = GsonUtil.mapToJsonStr(map);
 		if(!StringUtils.hasText(idStr)){
 			vo.setFileNo(fileNo);
@@ -128,6 +136,8 @@ public class InnerCatalogServiceImpl implements IInnerCatalogService {
 		if(entity.getContent().equals(brother.getContent())){
 			entity.setIsCompared(true);
 			brother.setIsCompared(true);
+			entity.setErrors("");
+			brother.setErrors("");
 			return 1;
 		}else{
 			Map<String,Object> entityMap=GsonUtil.jsonStrToMap(entity.getContent());
@@ -139,5 +149,60 @@ public class InnerCatalogServiceImpl implements IInnerCatalogService {
 		}
 		
 	}
+
+	@Override
+	public PageInfo<Map<String, Object>> listCompared(
+			PageInfo<Map<String, Object>> page)
+			throws Exception {
+		PageInfo<InnerCatalog> entityPage = 
+				this.innerCatalogDaoImpl.findPageByCompared(createQueryPage(page));
+		page.setList(createMapList(entityPage.getList()));
+		return page;
+	}
+
+	private List<Map<String, Object>> createMapList(List<InnerCatalog> list) {
+		List<Map<String,Object>> mapList = new ArrayList<Map<String,Object>>();
+		for(InnerCatalog entity:list){
+			Map<String,Object> map = GsonUtil.jsonStrToMap(entity.getContent());
+			map.put("id", entity.getId());
+			map.put("fileNo", entity.getFileNo());
+			map.put("errors", entity.getErrors());
+			map.put("imagesCount", entity.getImagesCount());
+			mapList.add(map);
+		}
+		return mapList;
+	}
+
+	@Override
+	public PageMsg checkImages(String ids,PageMsg msg) throws Exception {
+		Map<String,List<String>> directories = new FileUtil().checkImages(imagePath);
+		List<InnerCatalog> list = this.innerCatalogDaoImpl.findByIdsString(ids);
+		int count = 0;
+		for(InnerCatalog entity:list){
+			String fileNo = entity.getFileNo();
+			if(directories.containsKey(fileNo)){
+				List<String> images = directories.get(fileNo);
+				if(images.size()>0){
+					entity.setImagesCount(images.size());
+					this.merge(entity);
+					this.imageServiceImpl.saveForList(images,fileNo);
+					count++;
+				}
+			}
+		}
+		if(count>0){
+			msg.setMsg("检查完成，共"+count+"条记录匹配成功！");
+		}else{
+			msg.setMsg("检查完成，没有匹配的记录，请检查！");
+		}
+		msg.setSuccess(true);
+		return msg;
+	}
+
+	@Override
+	public void merge(InnerCatalog entity) throws Exception {
+		this.innerCatalogDaoImpl.doMerge(entity);
+	}
+	
 
 }

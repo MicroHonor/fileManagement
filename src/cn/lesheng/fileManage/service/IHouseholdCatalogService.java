@@ -37,6 +37,5 @@ public interface IHouseholdCatalogService {
 	
 	public void updateCompared(HouseholdCatalog entity) throws Exception;
 	public PageInfo<HouseholdCatalog> listCompared(PageInfo<HouseholdCatalog> page)throws Exception;
-	public PageMsg checkPhoto(String ids)throws Exception;
 	
 }

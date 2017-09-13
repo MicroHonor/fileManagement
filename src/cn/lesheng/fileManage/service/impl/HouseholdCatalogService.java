@@ -30,10 +30,6 @@ public class HouseholdCatalogService implements IHouseholdCatalogService {
 	@Resource
 	private ITFileService tFileServiceImpl;
 
-
-	@Value("${filePhotoPath}")
-	private String photoPath;
-	
 	@Override
 	public PageInfo<HouseholdCatalog> list(
 			PageInfo<HouseholdCatalog> page,User user) throws Exception {;
@@ -148,12 +144,6 @@ public class HouseholdCatalogService implements IHouseholdCatalogService {
 	public PageInfo<HouseholdCatalog> listCompared(
 			PageInfo<HouseholdCatalog> page) throws Exception {
 		return this.householdCatalogDao.findPageCompared(page);
-	}
-
-	@Override
-	public PageMsg checkPhoto(String ids) throws Exception {
-		FileUtil.checkPhoto(photoPath+"123");
-		return null;
 	}
 
 }

@@ -22,13 +22,15 @@ import cn.lesheng.fileManage.dto.PageInfo;
 import cn.lesheng.fileManage.dto.PageMsg;
 import cn.lesheng.fileManage.model.HouseholdCatalog;
 import cn.lesheng.fileManage.model.TFile;
+import cn.lesheng.fileManage.model.User;
+import cn.lesheng.fileManage.service.IBaseCatalogService;
 import cn.lesheng.fileManage.service.IHouseholdCatalogService;
 import cn.lesheng.fileManage.service.ITFileService;
 import cn.lesheng.fileManage.util.FileUtil;
 
 @Controller
 @RequestMapping("/householdCatalog")
-public class HouseholdCatalogController extends BaseController{
+public class HouseholdCatalogController {
 	
 	@Resource
 	private IHouseholdCatalogService householdCatalogService;
@@ -40,7 +42,8 @@ public class HouseholdCatalogController extends BaseController{
 	public PageInfo<HouseholdCatalog> list(PageInfo<HouseholdCatalog> page,
 			HttpServletRequest request){
 		try {
-			page = this.householdCatalogService.list(page,super.getCurrentUser(request));
+			User user = request.getSession().getAttribute("currentUser")!=null?(User)request.getSession().getAttribute("currentUser"):null;
+			page = this.householdCatalogService.list(page,user);
 			page.setSuccess(true);
 			return page;
 		} catch (Exception e) {
@@ -69,7 +72,8 @@ public class HouseholdCatalogController extends BaseController{
 	public PageMsg updateOrSave(String listStr,PageMsg msg,
 			HttpServletRequest request){
 		try {
-			msg = householdCatalogService.saveOrUpdate(listStr,msg,super.getCurrentUser(request));
+			User user = request.getSession().getAttribute("currentUser")!=null?(User)request.getSession().getAttribute("currentUser"):null;
+			msg = householdCatalogService.saveOrUpdate(listStr,msg,user);
 		} catch (Exception e) {
 			msg.setSuccess(false);
 			msg.setMsg(e.getMessage());
@@ -106,18 +110,6 @@ public class HouseholdCatalogController extends BaseController{
 		return msg;
 	}
 	
-	@RequestMapping("/checkPhoto")
-	@ResponseBody
-	public PageMsg checkPhoto(String ids,PageMsg msg){
-		try {
-			msg = this.householdCatalogService.checkPhoto(ids);
-		} catch (Exception e) {
-			e.printStackTrace();
-			msg.setSuccess(false);
-			msg.setMsg(e.toString());
-		}
-		return msg;
-	}
 	
 	@RequestMapping("/upload")
 	@ResponseBody
@@ -144,4 +136,5 @@ public class HouseholdCatalogController extends BaseController{
 		}
 		return JSONObject.fromObject(map).toString();
 	}
+	
 }
